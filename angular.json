@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/bootstrap.min.css"
+              "src/bootstrap.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -80,7 +80,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/bootstrap.min.css"
+              "src/bootstrap.css"
             ],
             "scripts": [],
             "assets": [
