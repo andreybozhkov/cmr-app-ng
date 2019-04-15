@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Sign Up</h1>
+  <br/>
+  <form onSubmit={this.handleSubmit}>
+      <fieldset>
+          <div class="form-group">
+              <label>
+                  <h5>Email Address (Username)</h5>
+                  <input type="email" class="form-control-lg" name="username" placeholder="Enter email" required />
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <h5>Password</h5>
+                  <input type="password" class="form-control-lg" name="password" placeholder="Enter password" required />
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <h5>First Name</h5>
+                  <input type="text" class="form-control-lg" name="firstName" placeholder="Enter your first name" required />
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <h5>Last Name</h5>
+                  <input type="text" class="form-control-lg" name="lastName" placeholder="Enter your last name" />
+              </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </fieldset>
+  </form>
+</div>
