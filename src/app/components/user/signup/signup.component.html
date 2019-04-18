@@ -1,30 +1,30 @@
 <div class="container">
   <h1>Sign Up</h1>
   <br/>
-  <form onSubmit={this.handleSubmit}>
+  <form #userForm="ngForm">
       <fieldset>
           <div class="form-group">
               <label>
                   <h5>Email Address (Username)</h5>
-                  <input type="email" class="form-control-lg" name="username" placeholder="Enter email" required />
+                  <input [(ngModel)]="user.username" type="email" class="form-control-lg" name="username" id="username" placeholder="Enter email" required />
               </label>
           </div>
           <div class="form-group">
               <label>
                   <h5>Password</h5>
-                  <input type="password" class="form-control-lg" name="password" placeholder="Enter password" required />
+                  <input [(ngModel)]="user.password" type="password" class="form-control-lg" name="password" id="password" placeholder="Enter password" required />
               </label>
           </div>
           <div class="form-group">
               <label>
                   <h5>First Name</h5>
-                  <input type="text" class="form-control-lg" name="firstName" placeholder="Enter your first name" required />
+                  <input [(ngModel)]="user.firstName" type="text" class="form-control-lg" name="firstName" id="firstName" placeholder="Enter your first name" required />
               </label>
           </div>
           <div class="form-group">
               <label>
                   <h5>Last Name</h5>
-                  <input type="text" class="form-control-lg" name="lastName" placeholder="Enter your last name" />
+                  <input [(ngModel)]="user.lastName" type="text" class="form-control-lg" name="lastName" id="lastName" placeholder="Enter your last name" />
               </label>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
