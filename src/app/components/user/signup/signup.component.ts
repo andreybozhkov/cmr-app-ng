@@ -11,7 +11,13 @@ export class SignupComponent implements OnInit {
 
   constructor() { }
 
-  user = new User("testuser@test.com","testpass","testFirstname","testLastName");
+  user: User = {
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: ''
+  }
+
   ngOnInit() {
   }
 
