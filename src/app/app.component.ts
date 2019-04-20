@@ -7,16 +7,14 @@ import { Component, DoCheck} from '@angular/core';
 })
 export class AppComponent implements DoCheck {
   title = 'CMR App Angular';
-  authToken : string = '';
+  authToken : boolean = false;
 
   ngDoCheck() {
-    if(this.authToken.length === 0 && sessionStorage.getItem('authtoken')) {
-      this.authToken = sessionStorage.getItem('authtoken');
-      console.log(this.authToken);
+    if(!this.authToken && sessionStorage.getItem('authtoken')) {
+      this.authToken = true;
     }
-    if(this.authToken.length > 0 && !sessionStorage.getItem('authtoken')) {
-      this.authToken = '';
-      console.log(this.authToken);
+    if(this.authToken && !sessionStorage.getItem('authtoken')) {
+      this.authToken = false;
     }
   }
 }

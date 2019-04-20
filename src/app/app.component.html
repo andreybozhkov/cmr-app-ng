@@ -1,7 +1,7 @@
-<navbar></navbar>
+<navbar [authToken]="authToken"></navbar>
 <h1 class="text-center">
   Welcome to the CMR App!
   <br/>
-  <small class="text-muted">Please Sign Up or Log In</small>
+  <small *ngIf="!authToken" class="text-muted">Please Sign Up or Log In</small>
 </h1>
 <router-outlet></router-outlet>

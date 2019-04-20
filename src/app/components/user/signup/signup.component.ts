@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../../../interfaces/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +11,7 @@ import { User } from '../../../interfaces/user';
 })
 export class SignupComponent {
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   user: User = {
     username: '',
@@ -18,14 +20,11 @@ export class SignupComponent {
     lastName: ''
   }
 
-  onSubmit() {
-    for (let field in this.user) {
-      if (this.user[field].length === 0) {
-        console.log(`${field} cannot be empty!`);
-        return;
-      }
-    }
-    console.log(this.user);
+  onSubmit(): void {
+    this.userService.signUp(this.user).subscribe(res => {
+      sessionStorage.setItem("authtoken", res.body._kmd.authtoken);
+      this.router.navigate(['/']);
+    });
   }
 
 }
