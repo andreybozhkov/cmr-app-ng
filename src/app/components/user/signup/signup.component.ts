@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../../../interfaces/user';
+import { User } from '../../../dataClasses/user';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class SignupComponent {
     username: '',
     password: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    roles: []
   }
 
   onSubmit(): void {

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private userService: UserService, private router: Router) { }
   @Input() authToken: boolean;
+  @Input() firstName: string;
 
   logOut() {
     this.userService.logOut().subscribe(() => {

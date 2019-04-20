@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/dataClasses/user';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,12 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  user: object = {
+  user: User = {
     username: '',
-    password: ''
+    password: '',
+    firstName: '',
+    lastName: '',
+    roles: []
   }
 
   onSubmit() {

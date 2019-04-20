@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import config from '../../config/config';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/dataClasses/user';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -27,7 +27,7 @@ export class UserService {
     )
   }
 
-  logIn(userData: object): Observable<HttpResponse<any>> {
+  logIn(userData: User): Observable<HttpResponse<any>> {
     let encodedAuth = window.btoa(`${config.kinveyAppKey}:${config.kinveyAppSecret}`);
     let data = JSON.stringify(userData);
     return this.http.post<any>(
@@ -53,5 +53,17 @@ export class UserService {
         }
       }
     )
+  }
+
+  getLoggedUser(): Observable<HttpResponse<User>> {
+    return this.http.get<User>(
+      `https://baas.kinvey.com/user/${config.kinveyAppKey}/_me`,
+      {
+        headers: {
+        'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        },
+        observe: 'response'
+      }
+    );
   }
 }
