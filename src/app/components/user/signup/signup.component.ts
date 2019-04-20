@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { User } from '../../../interfaces/user';
 
@@ -7,7 +7,7 @@ import { User } from '../../../interfaces/user';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   constructor() { }
 
@@ -18,7 +18,14 @@ export class SignupComponent implements OnInit {
     lastName: ''
   }
 
-  ngOnInit() {
+  onSubmit() {
+    for (let field in this.user) {
+      if (this.user[field].length === 0) {
+        console.log(`${field} cannot be empty!`);
+        return;
+      }
+    }
+    console.log(this.user);
   }
 
 }

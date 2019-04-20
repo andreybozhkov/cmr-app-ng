@@ -1,12 +1,12 @@
 <div class="container">
   <h1>Sign Up</h1>
   <br/>
-  <form #userForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
       <fieldset>
           <div class="form-group">
               <label>
                   <h5>Email Address (Username)</h5>
-                  <input [(ngModel)]="user.username" type="email" class="form-control-lg" name="username" id="username" placeholder="Enter email" required />
+                  <input [(ngModel)]="user.username" type="email" email class="form-control-lg" name="username" id="username" placeholder="Enter email" required />
               </label>
           </div>
           <div class="form-group">
@@ -27,7 +27,7 @@
                   <input [(ngModel)]="user.lastName" type="text" class="form-control-lg" name="lastName" id="lastName" placeholder="Enter your last name" required />
               </label>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button [disabled]="!userForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
       </fieldset>
   </form>
 </div>
