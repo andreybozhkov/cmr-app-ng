@@ -22,4 +22,15 @@ export class HaulierService {
       }
     )
   }
+
+  getAllHauliers(): Observable<Haulier[]> {
+    return this.http.get<Haulier[]>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/hauliers`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        }
+      }
+    )
+  }
 }

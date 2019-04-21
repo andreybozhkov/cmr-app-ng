@@ -21,5 +21,19 @@ export class ShipmentService {
       }
     );
   }
+
+  createShipment(shipment: object): Observable<any> {
+    let data = JSON.stringify(shipment);
+    return this.http.post<any>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments`,
+      data,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
 }
     
