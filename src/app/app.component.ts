@@ -17,7 +17,8 @@ export class AppComponent implements DoCheck {
     password: '',
     firstName: '',
     lastName: '',
-    roles: []
+    roles: [],
+    _id: ''
   };
 
   ngDoCheck() {
@@ -29,7 +30,8 @@ export class AppComponent implements DoCheck {
           password: '',
           firstName: res.body.firstName,
           lastName: res.body.lastName,
-          roles: res.body.roles
+          roles: res.body.roles,
+          _id: res.body._id
         }
       });
     }

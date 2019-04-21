@@ -17,7 +17,8 @@ export class LoginComponent {
     password: '',
     firstName: '',
     lastName: '',
-    roles: []
+    roles: [],
+    _id: ''
   }
 
   onSubmit() {

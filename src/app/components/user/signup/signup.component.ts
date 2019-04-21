@@ -18,7 +18,8 @@ export class SignupComponent {
     password: '',
     firstName: '',
     lastName: '',
-    roles: []
+    roles: [],
+    _id: ''
   }
 
   onSubmit(): void {

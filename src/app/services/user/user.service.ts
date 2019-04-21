@@ -66,4 +66,15 @@ export class UserService {
       }
     );
   }
+
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(
+      `https://baas.kinvey.com/user/${config.kinveyAppKey}/${userId}`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        }
+      }
+    )
+  }
 }

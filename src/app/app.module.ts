@@ -8,10 +8,12 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/common/navbar/navbar.component';
 import { SignupComponent } from './components/user/signup/signup.component';
 import { LoginComponent } from './components/user/login/login.component';
+import { ShipmentsComponent } from './components/shipments/shipments/shipments.component';
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'shipments', component: ShipmentsComponent },
 ]
 
 @NgModule({
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ShipmentsComponent
   ],
   imports: [
     RouterModule.forRoot(
