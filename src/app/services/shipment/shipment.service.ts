@@ -35,5 +35,16 @@ export class ShipmentService {
       }
     )
   }
+
+  getShipmentById(shipmentId: string): Observable<Shipment> {
+    return this.http.get<Shipment>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments/${shipmentId}`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        }
+      }
+    );
+  }
 }
     

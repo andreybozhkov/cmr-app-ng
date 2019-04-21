@@ -49,7 +49,7 @@
         <td>{{shipment['reminder-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment['invoice-nr-missing-cmr']}}</td>
         <td>
-            <a routerLink="shipments/{{shipment['shipment-id']}}">Open</a>
+            <a routerLink="{{shipment['shipment-id']}}">Open</a>
         </td>
       </tr>
     </tbody>

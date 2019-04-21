@@ -11,12 +11,14 @@ import { LoginComponent } from './components/user/login/login.component';
 import { ShipmentsComponent } from './components/shipments/shipments/shipments.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CreateShipmentComponent } from './components/shipments/create-shipment/create-shipment.component';
+import { ShipmentDetailComponent } from './components/shipments/shipment-detail/shipment-detail.component';
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'shipments', component: ShipmentsComponent, canActivate:[AuthGuard] },
-  { path: 'createShipment', component: CreateShipmentComponent, canActivate:[AuthGuard] }
+  { path: 'shipments', component: ShipmentsComponent, canActivate:[AuthGuard], pathMatch:'full' },
+  { path: 'createShipment', component: CreateShipmentComponent, canActivate:[AuthGuard] },
+  { path: 'shipments/:id', component: ShipmentDetailComponent, canActivate:[AuthGuard], pathMatch:'full' }
 ]
 
 @NgModule({
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     SignupComponent,
     LoginComponent,
     ShipmentsComponent,
-    CreateShipmentComponent
+    CreateShipmentComponent,
+    ShipmentDetailComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -1,0 +1,141 @@
+<div class="container">
+  <h1>Edit Shipment</h1>
+  <br/>
+  <form (ngSubmit)="onSubmit()" #shipmentForm="ngForm">
+    <fieldset>
+      <div class="form-group">
+          <label>
+              <h6>Customer</h6>
+              <input [(ngModel)]="shipment.customer" type="text" class="form-control" id="customer" name="customer" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Haulier</h6>
+              <select [(ngModel)]="shipment.haulier" class="form-control" id="haulier" name="haulier" required >                  
+                  <option *ngFor="let haulier of hauliers" [value]="haulier._id">{{haulier.name}}</option>
+              </select>
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Trailer</h6>
+              <input [(ngModel)]="shipment.trailer" type="text" class="form-control" id="trailer" name="trailer" required />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Loading Address</h6>
+              <input [(ngModel)]="shipment.loading_address" type="text" class="form-control" id="loading-address" name="loading-address" required />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Unloading Address</h6>
+              <input [(ngModel)]="shipment.unloading_address" type="text" class="form-control" id="unloading-address" name="unloading-address" required />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Delivery Date</h6>
+              <input [(ngModel)]="shipment.delivery_date" type="date" class="form-control" id="delivery-date" value="shipment.delivery_date" name="delivery-date" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Project ID</h6>
+              <input [(ngModel)]="shipment.project_id" type="string" class="form-control" id="project-id" name="project-id" required />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Shipment ID</h6>
+              <input [(ngModel)]="shipment.shipment_id" type="string" class="form-control" id="shipment-id" name="shipment-id" required />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Invoice Nr</h6>
+              <input [(ngModel)]="shipment.invoice_nr" type="number" class="form-control" id="invoice-nr" name="invoice-nr" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Invoice Amount</h6>
+              <input [(ngModel)]="shipment.invoice_amount" type="number" class="form-control" id="invoice-amount" name="invoice-amount" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Invoice Currency</h6>
+              <select [(ngModel)]="shipment.invoice_currency" class="form-control" id="inovice-currency" name="inovice-currency" >
+                  <option value='EUR'>EUR</option>
+                  <option value='SEK'>SEK</option>
+                  <option value='NOK'>NOK</option>
+                  <option value='Other'>Other</option>
+              </select>
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Project Resp. Person</h6>
+              <input [(ngModel)]="shipment.project_rep" type="text" class="form-control" id="project-resp" name="project-resp" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Requested Date</h6>
+              <input [(ngModel)]="shipment.requested_date" type="date" class="form-control" id="requested-date" name="requested-date" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Status</h6>
+              <select [(ngModel)]="shipment.status" class="form-control" id="status" name="status" required >
+                  <option value='Need Documents'>Need Documents</option>
+                  <option value='Done'>Done</option>
+                  <option value='Other'>Other</option>
+              </select>
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Documents needed</h6>
+              <select [(ngModel)]="shipment.documents_needed" class="form-control" id="documents-needed" name="documents-needed" multiple={true} >
+                  <option value='CMR'>CMR</option>
+                  <option value='Original CMR'>Original CMR</option>
+                  <option value='Delivery Note'>Delivery Note</option>
+                  <option value='Original Delivery Note'>Original Delivery Note</option>
+                  <option value='COP'>COP</option>
+                  <option value='Other'>Other</option>
+              </select>
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Received Date</h6>
+              <input [(ngModel)]="shipment.received_date" type="date" class="form-control" id="received-date" name="received-date" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Notes</h6>
+              <input [(ngModel)]="shipment.notes_internal" type="text" class="form-control" id="notes-internal" name="notes-internal" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Reminder Date</h6>
+              <input [(ngModel)]="shipment.reminder_date" type="date" class="form-control" id="reminder-date" name="reminder-date" />
+          </label>
+      </div>
+      <div class="form-group">
+          <label>
+              <h6>Invoice Nr for Missing CMR</h6>
+              <input [(ngModel)]="shipment.invoice_nr_missing_cmr" type="text" class="form-control" id="invoice-nr-missing-cmr" name="invoice-nr-missing-cmr" />
+          </label>
+      </div>
+      <button [disabled]="!shipmentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>
