@@ -17,8 +17,8 @@ export class AppComponent implements DoCheck {
     password: '',
     firstName: '',
     lastName: '',
-    roles: [],
-    _id: ''
+    _id: '',
+    roles: []
   };
 
   ngDoCheck() {
@@ -32,11 +32,23 @@ export class AppComponent implements DoCheck {
           lastName: res.body.lastName,
           roles: res.body.roles,
           _id: res.body._id
-        }
+        };
       });
     }
     if(this.authToken && !sessionStorage.getItem('authtoken')) {
       this.authToken = false;
     }
+    this.userService.checkLoggedUser(this.loggedUser);
+  }
+
+  logOut(): void {
+    this.loggedUser = {
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      _id: '',
+      roles: []
+    };
   }
 }

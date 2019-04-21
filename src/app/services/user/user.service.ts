@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import config from '../../config/config';
 import { User } from 'src/app/dataClasses/user';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +76,13 @@ export class UserService {
         }
       }
     )
+  }
+
+  private loggedUserSub = new Subject<User>();
+  loggedUser$ = this.loggedUserSub.asObservable();
+  checkLoggedUser(user: User) {
+    if (user._id.length > 0) {
+      this.loggedUserSub.next(user);
+    }
   }
 }
