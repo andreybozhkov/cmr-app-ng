@@ -30,23 +30,23 @@
       <tr>
         <td>{{shipment.customer}}</td>
         <td>{{shipment.haulier}}</td>
-        <td>{{shipment.trailer}}</td>
+        <td>{{shipment.trailer | uppercase}}</td>
         <td>{{shipment['loading-address']}}</td>
         <td>{{shipment['unloading-address']}}</td>
-        <td>{{shipment['delivery-date'] | date:"dd/mm/yyyy"}}</td>
+        <td>{{shipment['delivery-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment['project-id']}}</td>
         <td>{{shipment['shipnment-id']}}</td>
         <td>{{shipment['invoice-nr']}}</td>
         <td>{{shipment['invoice-amount']}}</td>
         <td>{{shipment['invoice-currency']}}</td>
         <td>{{shipment['project-resp']}}</td>
-        <td>{{shipment['requested-date']}}</td>
+        <td>{{shipment['requested-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment.status}}</td>
         <td>{{shipment['documents-needed'].join(', ')}}</td>
-        <td>{{shipment['received-date']}}</td>
+        <td>{{shipment['received-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment._acl.creator}}</td>
         <td>{{shipment['notes-internal']}}</td>
-        <td>{{shipment['reminder-date']}}</td>
+        <td>{{shipment['reminder-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment['invoice-nr-missing-cmr']}}</td>
         <td>
             <a routerLink="shipments/{{shipment['shipment-id']}}">Open</a>
