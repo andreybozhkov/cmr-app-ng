@@ -15,7 +15,7 @@
           <td><button type="button" class="btn btn-link btn-sm" (click)="displayTable(haulierMissing.id)">List</button></td>
         </tr>
       </tbody>
-      <button *ngIf="access_token_graph.length > 0" type="button" class="btn btn-primary" (click)="handleImplicitToken()">Implicit Log In</button>
+      <button *ngIf="access_token_graph.length === 0" type="button" class="btn btn-primary" (click)="handleImplicitToken()">Implicit Log In</button>
     </table>
 </div>
 <router-outlet></router-outlet>

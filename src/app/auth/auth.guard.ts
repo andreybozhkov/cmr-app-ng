@@ -23,6 +23,12 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
+    let parsedUrl = new URL(window.location.href);
+    let access_token = parsedUrl.hash.slice(parsedUrl.hash.indexOf("=") + 1, parsedUrl.hash.indexOf("&"));
+    if (access_token != null && access_token.length > 0) {
+      return true;
+    }
+    
     this.router.navigate(['/login']);
     return false;
   }
