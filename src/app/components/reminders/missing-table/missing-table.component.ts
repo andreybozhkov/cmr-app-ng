@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { RemindersTableResolverService } from 'src/app/services/reminders/reminders-table-resolver.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-missing-table',
@@ -8,15 +8,23 @@ import { RemindersTableResolverService } from 'src/app/services/reminders/remind
   styleUrls: ['./missing-table.component.css']
 })
 export class MissingTableComponent implements OnInit {
-  subscription: Subscription;
-  haulierData: {};
-  constructor(private remindersService: RemindersTableResolverService) {
-    this.subscription = remindersService.currentHaulierTable$.subscribe(haulierData => {
-      this.haulierData = haulierData;
-    })
+  haulierData: {
+    id: '',
+    name: '',
+    shipments: []
+  };
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe(data => {
+      this.haulierData = {
+        id: data.remindersResolver.id,
+        name: data.remindersResolver.name,
+        shipments: data.remindersResolver.shipments
+      };
+    });
+    console.log(this.haulierData);
   }
 
   ngOnInit() {
-    console.log(this.haulierData);
+    
   }
 }

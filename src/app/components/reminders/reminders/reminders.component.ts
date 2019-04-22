@@ -32,7 +32,17 @@ export class RemindersComponent implements OnInit {
           let singleHaulier = {
             id: shipment.haulier,
             name: '',
-            shipments: [{ ...shipment }]
+            shipments: [{
+              trailer: shipment.trailer,
+              'loading-address': shipment['loading-address'],
+              'unloading-address': shipment['unloading-address'],
+              'delivery-date': shipment['delivery-date'],
+              'project-id': shipment['project-id'],
+              'shipment-id': shipment._id,
+              status: shipment.status,
+              'documents-needed': shipment['documents-needed'],
+              'notes-internal': shipment['notes-internal']
+            }]
           };
           hauliersMissingDocs.push(singleHaulier);
           promisesHauliers.push(this.haulierSerivce.getHaulierById(shipment.haulier).toPromise());
@@ -41,7 +51,17 @@ export class RemindersComponent implements OnInit {
         }) >= 0) {
             hauliersMissingDocs[hauliersMissingDocs.findIndex((element) => {
               return element.id === shipment.haulier;
-            })].shipments.push({ ...shipment });
+            })].shipments.push({
+              trailer: shipment.trailer,
+              'loading-address': shipment['loading-address'],
+              'unloading-address': shipment['unloading-address'],
+              'delivery-date': shipment['delivery-date'],
+              'project-id': shipment['project-id'],
+              'shipment-id': shipment._id,
+              status: shipment.status,
+              'documents-needed': shipment['documents-needed'],
+              'notes-internal': shipment['notes-internal']
+            });
         }
       }
 

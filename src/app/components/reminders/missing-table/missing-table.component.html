@@ -1,7 +1,39 @@
 <div>
-  <h3>There are no shipments to work with!</h3>
-  <div>
-    <h4>Missing Documents for Haulier: this.props.haulierData.name</h4>
-      <button type="button" class="btn btn-primary" (click)="sendReminder()">Send Reminder</button>
+  <h3 *ngIf="haulierData.shipments.length === 0">There are no shipments to work with!</h3>
+  <div *ngIf="haulierData.shipments.length > 0">
+    <h4>Missing Documents for Haulier: {{haulierData.name}}</h4>
+    <button type="button" class="btn btn-primary" (click)="sendReminder()">Send Reminder</button>
+    <table id="tableShipments" class="table table-hover table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">Trailer</th>
+          <th scope="col">Loading Address</th>
+          <th scope="col">Unloading Address</th>
+          <th scope="col">Delivery Date</th>
+          <th scope="col">Project ID</th>
+          <th scope="col">Shipment ID</th>
+          <th scope="col">Status</th>
+          <th scope="col">Documents Needed</th>
+          <th scope="col">Notes</th>
+          <th scope="col">Modify</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let shipment of haulierData.shipments">
+        <tr>
+          <td>{{shipment.trailer | uppercase}}</td>
+          <td>{{shipment['loading-address']}}</td>
+          <td>{{shipment['unloading-address']}}</td>
+          <td>{{shipment['delivery-date'] | date:"dd/MM/yyyy"}}</td>
+          <td>{{shipment['project-id']}}</td>
+          <td>{{shipment['shipment-id']}}</td>
+          <td>{{shipment.status}}</td>
+          <td>{{shipment['documents-needed'].join(', ')}}</td>
+          <td>{{shipment['notes-internal']}}</td>
+          <td>
+              <a routerLink="/shipments/{{shipment['shipment-id']}}">Open</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

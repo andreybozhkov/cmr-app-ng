@@ -17,6 +17,7 @@ import { HaulierDetailComponent } from './components/hauliers/haulier-detail/hau
 import { CreateHaulierComponent } from './components/hauliers/create-haulier/create-haulier.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
 import { MissingTableComponent } from './components/reminders/missing-table/missing-table.component';
+import { RemindersTableResolverService } from './services/reminders/reminders-table-resolver.service';
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -30,7 +31,11 @@ const appRoutes: Routes = [
   { path: 'reminders', component: RemindersComponent, canActivate:[AuthGuard],
     children: [
       {
-        path: ':id', component: MissingTableComponent
+        path: ':id',
+        component: MissingTableComponent,
+        resolve: {
+          remindersResolver: RemindersTableResolverService
+        }
       }
     ]
   }
@@ -59,7 +64,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [RemindersTableResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
