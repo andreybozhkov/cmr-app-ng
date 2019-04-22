@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import config from '../../config/config';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Shipment } from 'src/app/dataClasses/shipment';
 
@@ -45,6 +45,18 @@ export class ShipmentService {
         }
       }
     );
+  }
+
+  deleteShipment(shipmentId: string): Observable<HttpResponse<any>> {
+    return this.http.delete(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments/${shipmentId}`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        },
+        observe: 'response'
+      }
+    )
   }
 }
     

@@ -6,7 +6,7 @@ import { Shipment } from 'src/app/dataClasses/shipment';
 import { Haulier } from 'src/app/dataClasses/haulier';
 import { HaulierService } from 'src/app/services/haulier/haulier.service';
 import { ShipmentService } from 'src/app/services/shipment/shipment.service';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shipment-detail',
@@ -25,6 +25,7 @@ export class ShipmentDetailComponent implements OnInit {
       this.user = user;
     });
   }
+  shipmentId: string = this.route.snapshot.paramMap.get('id');
 
   shipment: Shipment = {
     customer: '',
@@ -32,7 +33,7 @@ export class ShipmentDetailComponent implements OnInit {
     trailer: '',
     loading_address: '',
     unloading_address: '',
-    delivery_date: new Date(),
+    delivery_date: '',
     project_id: '',
     shipment_id: '',
     _id: '',
@@ -40,12 +41,12 @@ export class ShipmentDetailComponent implements OnInit {
     invoice_amount: 0,
     invoice_currency: '',
     project_resp: '',
-    requested_date: new Date(),
+    requested_date: '',
     status: '',
     documents_needed: [],
-    received_date: new Date(),
+    received_date: '',
     notes_internal: '',
-    reminder_date: new Date(),
+    reminder_date: '',
     invoice_nr_missing_cmr: '',
     _acl: {"creator": ''}
   }
@@ -56,15 +57,14 @@ export class ShipmentDetailComponent implements OnInit {
       this.hauliers = hauliers;
     });
 
-    let shipmentId = this.route.snapshot.paramMap.get('id');
-    this.shipmentService.getShipmentById(shipmentId).subscribe(shipment => {
+    this.shipmentService.getShipmentById(this.shipmentId).subscribe(shipment => {
       this.shipment = {
         customer: shipment.customer,
         haulier: shipment.haulier,
         trailer: shipment.trailer,
         loading_address: shipment['loading-address'],
         unloading_address: shipment['unloading-address'],
-        delivery_date: new Date(shipment['delivery-date']),
+        delivery_date: shipment['delivery-date'],
         project_id: shipment['project-id'],
         shipment_id: shipment['shipment-id'],
         _id: shipment._id,
@@ -72,38 +72,23 @@ export class ShipmentDetailComponent implements OnInit {
         invoice_amount: shipment['invoice-amount'],
         invoice_currency: shipment['invoice-currency'],
         project_resp: shipment['project-resp'],
-        requested_date: new Date(shipment['requested-date']),
+        requested_date: shipment['requested-date'],
         status: shipment.status,
         documents_needed: shipment['documents-needed'],
-        received_date: new Date(shipment['received-date']),
+        received_date: shipment['received-date'],
         notes_internal: shipment['notes-internal'],
-        reminder_date: new Date(shipment['reminder-date']),
+        reminder_date: shipment['reminder-date'],
         invoice_nr_missing_cmr: shipment['invoice-nr-missing-cmr'],
         _acl: {"creator": shipment._acl.creator}
       }
-      /*let shipmentData = {
-        customer: this.shipment.customer,
-        haulier: this.shipment.haulier,
-        trailer: this.shipment.trailer,
-        'loading-address': this.shipment.loading_address,
-        'unloading-address': this.shipment.unloading_address,
-        'delivery-date': this.shipment.delivery_date,
-        'project-id': this.shipment.project_id,
-        'shipment-id': this.shipment.shipment_id,
-        _id: this.shipment._id,
-        'invoice-nr': this.shipment.invoice_nr,
-        'invoice-amount': this.shipment.invoice_amount,
-        'invoice-currency': this.shipment.invoice_currency,
-        'project-resp': this.shipment.project_resp,
-        'requested-date': this.shipment.requested_date,
-        status: this.shipment.status,
-        'documents-needed': this.shipment.documents_needed,
-        'received-date': this.shipment.received_date,
-        'notes-internal': this.shipment.notes_internal,
-        'reminder-date': this.shipment.reminder_date,
-        'invoice-nr-missing-cmr': this.shipment.invoice_nr_missing_cmr
-      }*/
     });
   }
 
+  deleteShipment(shipmentId: string): void {
+    if(this.user.roles.includes('Admin')) {
+      this.shipmentService.deleteShipment(shipmentId).subscribe(r => {
+        this.router.navigate(['/shipments']);
+      })
+    }
+  }
 }

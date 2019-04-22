@@ -38,7 +38,7 @@
       <div class="form-group">
           <label>
               <h6>Delivery Date</h6>
-              <input [(ngModel)]="shipment.delivery_date" type="date" class="form-control" id="delivery-date" value="shipment.delivery_date" name="delivery-date" />
+              <input [(ngModel)]="shipment.delivery_date" type="date" class="form-control" id="delivery-date" value="shipment.delivery_date" name="delivery-date" required />
           </label>
       </div>
       <div class="form-group">
@@ -136,6 +136,7 @@
           </label>
       </div>
       <button [disabled]="!shipmentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+      <button *ngIf="user.roles.includes('Admin')" type="button" class="btn btn-primary" (click)="deleteShipment(shipmentId)">Delete Shipment</button>
     </fieldset>
   </form>
 </div>
