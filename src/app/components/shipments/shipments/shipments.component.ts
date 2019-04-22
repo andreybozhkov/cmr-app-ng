@@ -16,6 +16,7 @@ export class ShipmentsComponent implements OnInit {
   ngOnInit() {
     this.shipmentService.getShipments().subscribe(r => {
       this.shipments = r;
+      this.shipments.sort( (a, b) => Date.parse(b._kmd.ect) - Date.parse(a._kmd.ect));
 
       let haulierIDs = [];
       let userIDs = [];

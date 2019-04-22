@@ -47,6 +47,19 @@ export class ShipmentService {
     );
   }
 
+  editShipment(shipmentId: string, shipmentData: object): Observable<Shipment> {
+    return this.http.put<Shipment>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments/${shipmentId}`,
+      JSON.stringify(shipmentData),
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+
   deleteShipment(shipmentId: string): Observable<HttpResponse<any>> {
     return this.http.delete(
       `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments/${shipmentId}`,

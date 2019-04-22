@@ -35,7 +35,8 @@ export class CreateShipmentComponent implements OnInit {
     notes_internal: '',
     reminder_date: '',
     invoice_nr_missing_cmr: '',
-    _acl: {"creator": ''}
+    _acl: {"creator": ''},
+    _kmd: {"ect": ''}
   }
   hauliers: Haulier[];
 

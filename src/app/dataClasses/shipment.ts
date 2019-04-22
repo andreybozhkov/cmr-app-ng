@@ -20,6 +20,7 @@ export class Shipment {
         public notes_internal: string,
         public reminder_date: string,
         public invoice_nr_missing_cmr: string,
-        public _acl: {"creator": string}
+        public _acl: {"creator": string},
+        public _kmd: {"ect": string}
     ) { }
 }

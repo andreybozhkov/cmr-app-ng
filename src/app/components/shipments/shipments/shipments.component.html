@@ -35,7 +35,7 @@
         <td>{{shipment['unloading-address']}}</td>
         <td>{{shipment['delivery-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment['project-id']}}</td>
-        <td>{{shipment['shipnment-id']}}</td>
+        <td>{{shipment._id}}</td>
         <td>{{shipment['invoice-nr']}}</td>
         <td>{{shipment['invoice-amount']}}</td>
         <td>{{shipment['invoice-currency']}}</td>
@@ -49,7 +49,7 @@
         <td>{{shipment['reminder-date'] | date:"dd/MM/yyyy"}}</td>
         <td>{{shipment['invoice-nr-missing-cmr']}}</td>
         <td>
-            <a routerLink="{{shipment['shipment-id']}}">Open</a>
+            <a routerLink="{{shipment._id}}">Open</a>
         </td>
       </tr>
     </tbody>

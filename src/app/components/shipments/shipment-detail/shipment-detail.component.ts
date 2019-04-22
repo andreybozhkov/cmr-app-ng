@@ -48,7 +48,8 @@ export class ShipmentDetailComponent implements OnInit {
     notes_internal: '',
     reminder_date: '',
     invoice_nr_missing_cmr: '',
-    _acl: {"creator": ''}
+    _acl: {"creator": ''},
+    _kmd: {"ect": ''}
   }
   hauliers: Haulier[];
 
@@ -79,9 +80,41 @@ export class ShipmentDetailComponent implements OnInit {
         notes_internal: shipment['notes-internal'],
         reminder_date: shipment['reminder-date'],
         invoice_nr_missing_cmr: shipment['invoice-nr-missing-cmr'],
-        _acl: {"creator": shipment._acl.creator}
+        _acl: {"creator": shipment._acl.creator},
+        _kmd: {"ect": shipment._kmd.ect}
       }
     });
+  }
+
+  onSubmit() {
+    this.shipment._id = this.shipment.shipment_id;
+    let shipmentData = {
+      customer: this.shipment.customer,
+      haulier: this.shipment.haulier,
+      trailer: this.shipment.trailer,
+      'loading-address': this.shipment.loading_address,
+      'unloading-address': this.shipment.unloading_address,
+      'delivery-date': this.shipment.delivery_date,
+      'project-id': this.shipment.project_id,
+      'shipment-id': this.shipment.shipment_id,
+      _id: this.shipment._id,
+      'invoice-nr': this.shipment.invoice_nr,
+      'invoice-amount': this.shipment.invoice_amount,
+      'invoice-currency': this.shipment.invoice_currency,
+      'project-resp': this.shipment.project_resp,
+      'requested-date': this.shipment.requested_date,
+      status: this.shipment.status,
+      'documents-needed': this.shipment.documents_needed,
+      'received-date': this.shipment.received_date,
+      'notes-internal': this.shipment.notes_internal,
+      'reminder-date': this.shipment.reminder_date,
+      'invoice-nr-missing-cmr': this.shipment.invoice_nr_missing_cmr
+    }
+
+    this.shipmentService.editShipment(this.shipmentId, shipmentData).subscribe(r => {
+      console.log(r);
+      this.router.navigate(['/shipments']);
+    })
   }
 
   deleteShipment(shipmentId: string): void {
