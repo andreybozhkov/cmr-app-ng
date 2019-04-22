@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HaulierService } from 'src/app/services/haulier/haulier.service';
 import { Haulier } from 'src/app/dataClasses/haulier';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/dataClasses/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-haulier-detail',
@@ -9,13 +12,24 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./haulier-detail.component.css']
 })
 export class HaulierDetailComponent implements OnInit {
+  constructor(private haulierService: HaulierService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private userService: UserService) {
+    this.subscription = userService.loggedUser$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
   haulier: Haulier = {
     _id: '',
     name: '',
     contactEmails: []
   }
   emailField: string;
-  constructor(private haulierService: HaulierService, private router: Router, private route: ActivatedRoute) { }
+  subscription: Subscription;
+  user: User;
+  
   haulierId: string = this.route.snapshot.paramMap.get('id');
 
   ngOnInit() {
@@ -45,5 +59,13 @@ export class HaulierDetailComponent implements OnInit {
 
   removeEmail(email: string): void {
     this.haulier.contactEmails.splice(this.haulier.contactEmails.indexOf(email), 1);
+  }
+
+  deleteHaulier(haulierId: string): void {
+    if(this.user.roles.includes('Admin')) {
+      this.haulierService.deleteHaulier(haulierId).subscribe(r => {
+        this.router.navigate(['/hauliers']);
+      })
+    }
   }
 }

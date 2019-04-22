@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import config from '../../config/config';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Haulier } from 'src/app/dataClasses/haulier';
 
@@ -56,6 +56,18 @@ export class HaulierService {
           'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`,
           'Content-Type': 'application/json'
         }
+      }
+    )
+  }
+
+  deleteHaulier(haulierId: string): Observable<HttpResponse<any>> {
+    return this.http.delete(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/hauliers/${haulierId}`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        },
+        observe: 'response'
       }
     )
   }

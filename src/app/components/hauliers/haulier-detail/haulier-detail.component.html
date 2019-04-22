@@ -21,6 +21,7 @@
                   <li>{{email}} <button type="button" class="btn btn-primary btn-sm" (click)="removeEmail(email)">Remove Email</button></li>
                 </ul>
             <button [disabled]="!haulierForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+            <button *ngIf="user.roles.includes('Admin')" type="button" class="btn btn-primary" (click)="deleteHaulier(haulierId)">Delete Shipment</button>
         </fieldset>
     </form>
 </div>
