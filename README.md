@@ -1,27 +1,33 @@
-# CmrAppNg
+Document requests tracking and automation for a freight forwarding company.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This is a Single Page Application (SPA) built with Angular framework and Kinvey back-end.
 
-## Development server
+Major application sections are navigated to mostly using the navbar at the top of the page and rendered using the Angular router.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Public Part:
+- Application start page
+- Sign-Up page - special note: admin priviliges for the moment must be granted on the back-end. Admin creation can be added at later stage.
+- Log-In page
 
-## Code scaffolding
+Private (User) Part (protected with custom private routes):
+- Shipments:
+    - Shipments list
+    - Shipment details
+        - Possibility to edit and delete. All users can edit. Only admins can delete. User role (all users vs admin) is enforced on front-end with array of roles and on back-end.
+    - Shipment creation. All users can create shipments.
+- Hauliers:
+    - Hauliers list
+    - Haulier details
+        - Possibility to edit and delete. All users can edit. Only admins can delete. User role (all users vs admin) is enforced on front-end with array of roles and on back-end.
+    - Haulier creation. All users can create hauliers.
+- Reminders (querying, filtering and "manual" population applied to get desired results):
+    - List of hauliers and the nr of missing documents respectively.
+    - Detailed list of missing documents per haulier.
+    - Send e-mail with reminders (connect with Microsoft Graph API).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Administrator Part:
+- Ability to delete shipments and hauliers.
 
-## Build
+Made for JS Web module, Angular Fundamentals course at SoftUni.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+SoftUni username: andreybozhkov

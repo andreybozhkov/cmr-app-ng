@@ -26,8 +26,8 @@
         <th scope="col">Modify</th>
       </tr>
     </thead>
-    <tbody *ngFor="let shipment of shipments">
-      <tr>
+    <tbody>
+      <tr *ngFor="let shipment of shipments">
         <td>{{shipment.customer | titlecase}}</td>
         <td>{{shipment.haulier | titlecase}}</td>
         <td>{{shipment.trailer | uppercase}}</td>

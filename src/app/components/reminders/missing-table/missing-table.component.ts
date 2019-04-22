@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RemindersTableResolverService } from 'src/app/services/reminders/reminders-table-resolver.service';
 
 @Component({
   selector: 'app-missing-table',
   templateUrl: './missing-table.component.html',
   styleUrls: ['./missing-table.component.css']
 })
-export class MissingTableComponent {
+export class MissingTableComponent implements OnInit {
   haulierData: {
     id: '',
     name: '',
     shipments: []
   };
+  access_token_graph: string = '';
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private remindersService: RemindersTableResolverService) {
     this.route.data.subscribe(data => {
       this.haulierData = {
         id: data.remindersResolver.id,
@@ -23,36 +25,29 @@ export class MissingTableComponent {
     });
   }
 
-  sendReminder() {
-    let tableDoc = document.getElementById("tableShipments");
-    console.log(tableDoc);
-    let tableHead = '<thead>';
-    let tableBody = '<tbody>';
-    let columnIndices = [1,2,3,4,5,6,12,13];
-    /*for (let i = 0; i < tableDoc.row.length; i++) {
-        let row = '<tr>';
-        for (let a = 0; a < tableDoc.rows[i].cells.length; a++) {
-            if (columnIndices.includes(a)) {
-                if (i === 0) {
-                    row += `<th>${tableDoc.rows[i].cells[a].innerHTML}</th>`;
-                } else {
-                    row += `<td>${tableDoc.rows[i].cells[a].innerHTML}</td>`;    
-                }
-            }
-            if (a === columnIndices[columnIndices.length - 1]) {
-                if (i === 0) {
-                    row += `</tr></thead>`;
-                } else {
-                    row += `</tr>`;
-                    if (i === tableDoc.rows.length - 1) {
-                        row += `</tbody>`;
-                    }
-                }
-            }
-        }
-        tableBody += row;
+  ngOnInit() {
+    if (this.access_token_graph.length === 0 && sessionStorage.getItem('access_token_graph')) {
+      this.access_token_graph = sessionStorage.getItem('access_token_graph');
+    } else if (this.access_token_graph.length > 0 && !sessionStorage.getItem('access_token_graph')) {
+      this.access_token_graph = '';
     }
+  }
 
-    let mailBody = `<table>${tableHead}${tableBody}</table>`;*/
+  sendReminder() {
+    let tableHead = '<thead><tr><th>Trailer</th><th>Loading Address</th><th>Unloading Address</th><th>Delivery Date</th><th>Project ID</th>';
+    tableHead+= '<th>Shipment ID</th><th>Status</th><th>Documents Needed</th><th>Notes</th></tr></thead>';
+    let tableBody = '<tbody>';
+    this.haulierData.shipments.forEach(shipment => {
+      let row = '<tr>';
+      row+= `<td>${shipment['trailer']}</td><td>${shipment['loading-address']}</td><td>${shipment['unloading-address']}</td><td>${shipment['delivery-date']}</td>`;
+      row+= `<td>${shipment['project-id']}</td><td>${shipment['shipment-id']}</td><td>${shipment['status']}</td><td>${shipment['documents-needed']}</td><td>${shipment['notes-internal']}</td>`;
+      row += '</tr>';  
+      tableBody += row;
+    });
+
+    let mailBody = `<table'>${tableHead}${tableBody}</table>`;
+    
+    this.remindersService.sendReminder(mailBody).subscribe(r => {
+    });
   }
 }

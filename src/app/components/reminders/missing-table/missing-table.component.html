@@ -2,8 +2,8 @@
   <h3 *ngIf="haulierData.shipments.length === 0">There are no shipments to work with!</h3>
   <div *ngIf="haulierData.shipments.length > 0">
     <h4>Missing Documents for Haulier: {{haulierData.name}}</h4>
-    <button type="button" class="btn btn-primary" (click)="sendReminder()">Send Reminder</button>
-    <table id="tableShipments" class="table table-hover table-responsive">
+    <button *ngIf="access_token_graph.length > 0" type="button" class="btn btn-primary" (click)="sendReminder()">Send Reminder</button>
+    <table #tableShipments id="tableShipments" class="table table-hover table-responsive">
       <thead>
         <tr>
           <th scope="col">Trailer</th>
@@ -18,8 +18,8 @@
           <th scope="col">Modify</th>
         </tr>
       </thead>
-      <tbody *ngFor="let shipment of haulierData.shipments">
-        <tr>
+      <tbody>
+        <tr *ngFor="let shipment of haulierData.shipments">
           <td>{{shipment.trailer | uppercase}}</td>
           <td>{{shipment['loading-address']}}</td>
           <td>{{shipment['unloading-address']}}</td>
