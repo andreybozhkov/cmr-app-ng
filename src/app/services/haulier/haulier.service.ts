@@ -33,4 +33,17 @@ export class HaulierService {
       }
     )
   }
+
+  addHaulier(haulier: object): Observable<Haulier> {
+    return this.http.post<any>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/hauliers`,
+      JSON.stringify(haulier),
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
 }

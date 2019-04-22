@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Haulier } from 'src/app/dataClasses/haulier';
+import { HaulierService } from 'src/app/services/haulier/haulier.service';
 
 @Component({
   selector: 'app-hauliers',
@@ -9,9 +10,19 @@ import { Haulier } from 'src/app/dataClasses/haulier';
 export class HauliersComponent implements OnInit {
   hauliers: Array<Haulier>;
 
-  constructor() { }
+  constructor(private haulierService: HaulierService) { }
 
   ngOnInit() {
+    this.haulierService.getAllHauliers().subscribe(hauliers => {
+      this.hauliers = hauliers;
+      this.hauliers.sort((a,b) => {
+        let x = a.name.toLowerCase();
+        let y = b.name.toLowerCase();
+        if (x < y) { return -1; }
+        if (y > x) { return 1; }
+        return 0;
+      });
+    })
   }
 
 }

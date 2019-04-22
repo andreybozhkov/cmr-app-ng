@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Create Haulier</h1>
+    <br/>
+    <form (ngSubmit)="onSubmit()" #haulierForm="ngForm">
+        <fieldset>
+            <div class="form-group">
+                <label>
+                    <h6>Haulier Name</h6>
+                    <input [(ngModel)]="haulier.name" type="text" class="form-control" name="name" placeholder="Enter haulier company name" required />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <h6>Enter Contact Email</h6>
+                    <input [(ngModel)]="emailField" #addEmail="ngModel" email type="email" class="form-control" id="addEmail" name="addEmail" placeholder="Enter haulier contact e-mail" />
+                    <button [disabled]="!addEmail.valid" type="button" class="btn btn-secondary" (click)="addEmailToList()">Add email</button>
+                </label>
+            </div>
+            <h6>Haulier Contact Emails List</h6>
+                <ul *ngFor="let email of haulier.contactEmails">
+                  <li>{{email}} <button type="button" class="btn btn-primary btn-sm" (click)="removeEmail(email)">Remove Email</button></li>
+                </ul>
+            <button [disabled]="!haulierForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+</div>

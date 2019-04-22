@@ -9,6 +9,13 @@
       </tr>
     </thead>
     <tbody>
+      <tr *ngFor="let haulier of hauliers">
+        <td>{{haulier.name}}</td>
+        <td>{{haulier.contactEmails.join('; ')}}</td>
+        <td>
+          <a href="/hauliers/{{haulier._id}}">Open</a>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

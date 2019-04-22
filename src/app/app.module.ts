@@ -13,6 +13,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { CreateShipmentComponent } from './components/shipments/create-shipment/create-shipment.component';
 import { ShipmentDetailComponent } from './components/shipments/shipment-detail/shipment-detail.component';
 import { HauliersComponent } from './components/hauliers/hauliers/hauliers.component';
+import { HaulierDetailComponent } from './components/hauliers/haulier-detail/haulier-detail.component';
+import { CreateHaulierComponent } from './components/hauliers/create-haulier/create-haulier.component';
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -21,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'createShipment', component: CreateShipmentComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'shipments/:id', component: ShipmentDetailComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'hauliers', component: HauliersComponent, canActivate:[AuthGuard], pathMatch:'full' },
+  { path: 'createHaulier', component: CreateHaulierComponent, canActivate:[AuthGuard], pathMatch:'full' }
 ]
 
 @NgModule({
@@ -32,7 +35,9 @@ const appRoutes: Routes = [
     ShipmentsComponent,
     CreateShipmentComponent,
     ShipmentDetailComponent,
-    HauliersComponent
+    HauliersComponent,
+    HaulierDetailComponent,
+    CreateHaulierComponent
   ],
   imports: [
     RouterModule.forRoot(
