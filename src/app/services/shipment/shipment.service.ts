@@ -71,5 +71,18 @@ export class ShipmentService {
       }
     )
   }
+
+  getShipmentsByQuery(queryKey: string, queryValue: string): Observable<Array<Shipment>> {
+    let queryKeyEncode = encodeURI(queryKey);
+    let queryValueEncode = encodeURI(queryValue);
+    return this.http.get<Array<Shipment>>(
+      `https://baas.kinvey.com/appdata/${config.kinveyAppKey}/shipments?query={"${queryKeyEncode}":"${queryValueEncode}"}`,
+      {
+        headers: {
+          'Authorization': `Kinvey ${sessionStorage.getItem('authtoken')}`
+        }
+      }
+    )
+  }
 }
     
