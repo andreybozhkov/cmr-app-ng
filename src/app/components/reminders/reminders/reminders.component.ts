@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ShipmentService } from 'src/app/services/shipment/shipment.service';
 import { HaulierService } from 'src/app/services/haulier/haulier.service';
+import { Router } from '@angular/router';
+import { RemindersTableResolverService } from 'src/app/services/reminders/reminders-table-resolver.service';
 
 @Component({
   selector: 'app-reminders',
@@ -9,8 +12,12 @@ import { HaulierService } from 'src/app/services/haulier/haulier.service';
 })
 export class RemindersComponent implements OnInit {
   access_token_graph: string = '';
-  hauliersMissingDocs: object[] = [];
-  constructor(private shipmentService: ShipmentService, private haulierSerivce: HaulierService) { }
+  hauliersMissingDocs = [];
+  constructor(private shipmentService: ShipmentService,
+              private haulierSerivce: HaulierService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private remindersService: RemindersTableResolverService) { }
 
   ngOnInit() {
     this.shipmentService.getShipmentsByQuery('status', 'Need Documents').subscribe(res => {
@@ -49,4 +56,11 @@ export class RemindersComponent implements OnInit {
     });
   }
 
+  displayTable(haulierId: string) {
+    let haulierData = this.hauliersMissingDocs.find((e) => {
+      return e.id === haulierId;
+    });
+    this.remindersService.setCurrentHaulierData(haulierData);
+    this.router.navigate([`./${haulierId}`], {relativeTo: this.route});
+  }
 }

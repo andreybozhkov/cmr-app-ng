@@ -1,7 +1,6 @@
 <div>
-  <h3>There are no missing documents!</h3>
-  <div>
-    <table class="table table-hover table-responsive">
+  <h3 *ngIf="hauliersMissingDocs.length === 0">There are no missing documents!</h3>
+    <table *ngIf="hauliersMissingDocs.length > 0" class="table table-hover table-responsive">
       <thead>
         <tr>
           <th scope="col">Haulier Name</th>
@@ -13,12 +12,10 @@
         <tr *ngFor="let haulierMissing of hauliersMissingDocs">
           <td>{{haulierMissing.name}}</td>
           <td>{{haulierMissing.shipments.length}}</td>
-          <td>
-            <a routerLink="/reminders/{{haulierMissing.id}}">List</a>
-          </td>
+          <td><button type="button" class="btn btn-link btn-sm" (click)="displayTable(haulierMissing.id)">List</button></td>
         </tr>
       </tbody>
+      <button *ngIf="access_token_graph.length > 0" type="button" class="btn btn-primary" (click)="handleImplicitToken()">Implicit Log In</button>
     </table>
-    <button *ngIf="access_token_graph.length > 0" type="button" class="btn btn-primary" (click)="handleImplicitToken()">Implicit Log In</button>
-  </div>
 </div>
+<router-outlet></router-outlet>

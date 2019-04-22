@@ -16,6 +16,7 @@ import { HauliersComponent } from './components/hauliers/hauliers/hauliers.compo
 import { HaulierDetailComponent } from './components/hauliers/haulier-detail/haulier-detail.component';
 import { CreateHaulierComponent } from './components/hauliers/create-haulier/create-haulier.component';
 import { RemindersComponent } from './components/reminders/reminders/reminders.component';
+import { MissingTableComponent } from './components/reminders/missing-table/missing-table.component';
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -26,7 +27,13 @@ const appRoutes: Routes = [
   { path: 'hauliers', component: HauliersComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'createHaulier', component: CreateHaulierComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'hauliers/:id', component: HaulierDetailComponent, canActivate:[AuthGuard], pathMatch:'full' },
-  { path: 'reminders', component: RemindersComponent, canActivate:[AuthGuard] }
+  { path: 'reminders', component: RemindersComponent, canActivate:[AuthGuard],
+    children: [
+      {
+        path: ':id', component: MissingTableComponent
+      }
+    ]
+  }
 ]
 
 @NgModule({
@@ -41,7 +48,8 @@ const appRoutes: Routes = [
     HauliersComponent,
     HaulierDetailComponent,
     CreateHaulierComponent,
-    RemindersComponent
+    RemindersComponent,
+    MissingTableComponent
   ],
   imports: [
     RouterModule.forRoot(
