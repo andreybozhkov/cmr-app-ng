@@ -23,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'createShipment', component: CreateShipmentComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'shipments/:id', component: ShipmentDetailComponent, canActivate:[AuthGuard], pathMatch:'full' },
   { path: 'hauliers', component: HauliersComponent, canActivate:[AuthGuard], pathMatch:'full' },
-  { path: 'createHaulier', component: CreateHaulierComponent, canActivate:[AuthGuard], pathMatch:'full' }
+  { path: 'createHaulier', component: CreateHaulierComponent, canActivate:[AuthGuard], pathMatch:'full' },
+  { path: 'hauliers/:id', component: HaulierDetailComponent, canActivate:[AuthGuard], pathMatch:'full' }
 ]
 
 @NgModule({

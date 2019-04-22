@@ -23,7 +23,6 @@ export class CreateHaulierComponent {
       contactEmails: this.haulier.contactEmails
     }
     this.haulierService.addHaulier(haulierData).subscribe(r => {
-      console.log(r);
       this.router.navigate(['/hauliers']);
     })
   }
